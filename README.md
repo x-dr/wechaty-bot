@@ -52,7 +52,8 @@ pm2 start app.js
 
 ![微信截图_20221207215949.png](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/beb1ea21-0e3c-4c47-9fc4-d67ba3752cf3.png)
 
-那运行以下命令（仅适用ubuntu,dabian）
+> 那请运行以下命令（仅适用ubuntu,dabian）
+
 ```bash
 sudo apt-get update
 sudo apt-get install -y libgbm-dev
