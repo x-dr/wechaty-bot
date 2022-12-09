@@ -5,13 +5,19 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
-  "keywords": [],
+  "keywords": [
+    "chatgpt",
+    "wechat",
+    "wechaty",
+    "微信机器人",
+    "微信助手"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chatgpt": "^2.0.1",
+    "chatgpt": "^2.0.5",
     "dotenv": "^16.0.3",
     "p-timeout": "^6.0.0",
     "qrcode-terminal": "^0.12.0",

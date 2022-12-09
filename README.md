@@ -13,6 +13,7 @@
 + 2、登录完了，在控制台把 `token` 复制下来，然后在项目根目录下创建一个 `.env` 文件，内容如下：
 
 ```bash
+# $wechaty-bot
 # 执行下面命令，拷贝一份 .env.example 文件
 cp .env.example .env
 ```
@@ -29,8 +30,20 @@ ChatGPTToken='xxxxxxxxxx'
 token 在这里拿到：
 ![chatgpt.png](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/3b58d6e3-8abc-4ab8-916e-511c0b2bdf42.png)
 > 参考这篇文章：[https://github.com/transitive-bullshit/chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
+
+
 ### 2、启动服务
 
+#### 使用Docker启动
+
+```bash
+mkdir my-wechaty-bot && cd my-wechaty-bot
+wget -O .env  https://raw.githubusercontent.com/x-dr/wechaty-bot/main/.env.example 
+
+docker run  -itd  wechaty-bot
+```
+
+#### 本地启动
 ```bash
 npm i
 node app.js
