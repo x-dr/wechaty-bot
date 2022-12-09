@@ -4,7 +4,7 @@
 
 可以用来帮助你自动回复微信消息。
 
-### 1、准备
+### 准备
 
 + 1、先获取自己的 `chatgpt` token，地址 ：[https://chat.openai.com/chat](https://chat.openai.com/chat)
 
@@ -32,18 +32,41 @@ token 在这里拿到：
 > 参考这篇文章：[https://github.com/transitive-bullshit/chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
 
 
-### 2、启动服务
+### 启动服务
 
-#### 使用Docker启动
+#### 1、使用Docker
 
+下载并编辑`.env`配置文件
 ```bash
 mkdir my-wechaty-bot && cd my-wechaty-bot
 wget -O .env  https://raw.githubusercontent.com/x-dr/wechaty-bot/main/.env.example 
+vim .env
 
-docker run  -itd  wechaty-bot
 ```
 
-#### 本地启动
+> 运行
+```bash
+docker run -itd --name my-wechaty-bot \
+           -v $PWD/.env:/app/.env  \
+           gindex/wechaty-bot:latest
+                    
+```
+> 查看日志扫码登录
+```bash
+docker logs my-wechaty-bot -f
+```
+
+![wechaty-docker.png](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/67b1a5be-67f2-4d3a-8c01-3ba2a5bb653e.png)
+
+
+> 自行打包docker镜像
+```bash
+docker build -t wechaty-bot .
+docker run -it --rm --name wechaty-bot wechaty-bot
+```
+
+
+#### 2、本地启动
 ```bash
 npm i
 node app.js
@@ -61,11 +84,13 @@ pm2 start app.js
 
 
 
-### 3、如果报以下错误
+### 如果报以下错误
 
 ![微信截图_20221207215949.png](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/beb1ea21-0e3c-4c47-9fc4-d67ba3752cf3.png)
 
-> 那请运行以下命令（仅适用ubuntu,dabian）
+> 参考 [https://github.com/puppeteer/puppeteer](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md)
+
+> ubuntu,dabian运行以下命令解决
 
 ```bash
 sudo apt-get update
@@ -73,4 +98,3 @@ sudo apt-get install -y libgbm-dev
 sudo apt install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 ```
 
-> 参考 [https://github.com/puppeteer/puppeteer](https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md)

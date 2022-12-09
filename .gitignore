@@ -201,3 +201,5 @@ dist
 dist-ssr
 *.local
 *card.json
+
+my-wechaty-bot
