@@ -75,7 +75,7 @@ node app.js
 ```
 > 就可以扫码登录了。
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/d4ab1dfd-e667-4826-a7b2-b9171fde7f43.png"  height="330" width="495">
+<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/d4ab1dfd-e667-4826-a7b2-b9171fde7f43.png"  height="200" width="495">
 
 
 用pm2启动后台运行
@@ -84,7 +84,7 @@ npm install pm2 -g
 
 pm2 start app.js
 ```
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/511d26f4-4dd5-427c-b19e-fabdddb47207.png"  height="330" width="495">
+<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/511d26f4-4dd5-427c-b19e-fabdddb47207.png"  height="50" width="495">
 
 
 
