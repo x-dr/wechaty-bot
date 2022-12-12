@@ -75,6 +75,7 @@ docker run -it --rm --name wechaty-bot wechaty-bot
 
 #### 2、本地启动
 ```bash
+git clone https://github.com/x-dr/wechaty-bot.git
 npm i
 node app.js
 ```
