@@ -9,12 +9,15 @@ RUN apk add --no-cache \
       harfbuzz \
       ca-certificates \
       ttf-freefont  \
+      && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+      && echo "Asia/Shanghai" > /etc/timezone \
+      && npm install -g pm2 \
       && rm -rf /var/cache/apk/* \
       && rm -rf /tmp/* \
-      && rm -rf /var/tmp/* \
-      && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-      && echo "Asia/Shanghai" > /etc/timezone
+      && rm -rf /var/tmp/* 
 
+      
+ 
 # Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
@@ -30,6 +33,6 @@ RUN npm install
 
 EXPOSE 8080
 
-CMD [ "npm", "start" ]
+CMD [ "pm2", "start","app.js"]
 
 
