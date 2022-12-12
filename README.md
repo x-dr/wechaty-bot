@@ -54,6 +54,7 @@ vim .env
 > 运行
 ```bash
 docker run -itd --name my-wechaty-bot \
+            --restart=always \
            -v $PWD/.env:/app/.env  \
            gindex/wechaty-bot:latest
                     
