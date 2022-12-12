@@ -33,6 +33,6 @@ RUN npm install
 
 EXPOSE 8080
 
-CMD [ "pm2", "start","app.js"]
+CMD [ "npm", "start"]
 
 
