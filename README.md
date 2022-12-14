@@ -93,11 +93,21 @@ pm2 start app.js
 ```
 <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/511d26f4-4dd5-427c-b19e-fabdddb47207.png"  height="50" width="495">
 
+### 使用
++ 智能回复
+```
+/c xxxx
+```
++ AI绘画
+```
+/img xxx
+```
+<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/a17c1896-d3db-4ab0-a3ad-ba865adcc26d.png" alt="openai.png" title="openai.png"  height="50%" width="50%" />
 
 ### 费用情况
 
 openai是要付费的，价格的计算方式不是简单的按照请求次数计算，包括相应内容的文字的多少。新账号有18美元免费额度。
-按官方计价方式：6.4美元 / 0.0004美元 * 750单词 ≈ 120W单词？
+
 
 > 官方价格：https://openai.com/api/pricing
 
