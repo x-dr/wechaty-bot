@@ -29,15 +29,18 @@ const getOpenAiReply = async (prompt) => {
         // return e
     }
 }
-// getOpenAiReply('删除github上的一次提交')
 const replyMessage = async (mgsfrom, contact, content) => {
-    //   async function replyMessage(contact, content) {
     const reply = await getOpenAiReply(content);
     try {
-        await contact.say(`@${mgsfrom} ${reply}`);
+        if (mgsfrom) {
+            await contact.say(`@${mgsfrom} ${reply}`);
+        } else {
+            await contact.say(reply);
+        }
     } catch (e) {
         console.error(e);
     }
 }
+
 
 export default replyMessage

@@ -1,5 +1,5 @@
 import Express from 'express';
-import sendmsg from '../utils/sendmsg.js'
+import sendmsg from '../utils/pushmsg.js'
 /**
  * @description 您的机器人上线啦
  * @param {} user
