@@ -2,7 +2,6 @@ import { ChatGPTAPI } from 'chatgpt';
 let apiKey = '';
 const api = new ChatGPTAPI({ apiKey: apiKey || process.env.OPENAI_API_KEY });
 
-// console.log(api);
 const conversationPool = new Map();
 async function chatgptReply(room, contact, request) {
     console.log(`contact: ${contact} request: ${request}`);
@@ -23,7 +22,6 @@ async function chatgptReply(room, contact, request) {
         opts.timeoutMs = 2 * 60 * 1000;
         let res = await api.sendMessage(request, opts);
         response = res.text;
-        // console.log(res);
         console.log(`contact: ${contact} response: ${response}`);
         conversation = {
           conversationId: res.conversationId,
@@ -48,9 +46,6 @@ async function chatgptReply(room, contact, request) {
 
   async function send(contact, message) {
     try {
-      // console.log(contact);
-      // console.log("\n");
-      // console.log(message);
       await contact.say(message);
     } catch (e) {
       console.error(e);
