@@ -1,6 +1,6 @@
 # ChatGPT Bot
 
-一个 基于 `OpenAI` + `Wechaty` 智能回复、AI绘画的微信机器人,可以用来帮助你自动回复微信消息。
+一个 基于 `OpenAI` + `Wechaty` 智能回复、支持上下文回复、AI绘画的微信机器人,可以用来帮助你自动回复微信消息。
 
 ### 准备
 
@@ -8,11 +8,10 @@
 > API Key 创建成功。复制好这个Key接下来会用到。点击OK后，Key不会再完整显示。只能删了重新生成Key！
 > 如果没账号，可以参考V2EX上这个帖子注册 地址[https://www.v2ex.com/t/900126](https://www.v2ex.com/t/900126)
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/fe6b3e02-75a9-4b1e-9c5f-ed5f99922343.png" alt="Create_openai_key.png" title="Create_openai_key.png" height="50%" width="50%" />
+<img src="images/Create_openai_key.png" height="50%" width="50%">
 
-~~+ 1、先获取自己的 `chatgpt` token，地址 ：[https://chat.openai.com/chat](https://chat.openai.com/chat)~~
 
-~~+ 2、登录完了，在控制台把 `token` 复制下来，然后在项目根目录下创建一个 `.env` 文件，内容如下：~~
+
 
 ```bash
 # $wechaty-bot
@@ -35,16 +34,13 @@ OPENAI_API_KEY ='sk-xxxxxxxxxxxxxxxxx'
 
 ```
 
-~~token 在这里拿到：~~
-
-<!-- ~~<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/3b58d6e3-8abc-4ab8-916e-511c0b2bdf42.png"  height="330" width="495">~~ -->
-
-~~> 参考这篇文章：[https://github.com/transitive-bullshit/chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)~~
 
 
 ### 启动服务
 
 #### 1、使用Docker
+
+<!-- + 1、安装 `docker` 和 `docker-compose`，地址 ：[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/) -->
 
 下载并编辑`.env`配置文件
 ```bash
@@ -67,7 +63,7 @@ docker run -itd --name my-wechaty-bot \
 docker logs my-wechaty-bot -f
 ```
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/67b1a5be-67f2-4d3a-8c01-3ba2a5bb653e.png"  height="330" width="495">
+<img src="images/wechaty-docker.png"  height="50%" width="50%">
 
 
 > 自行打包docker镜像
@@ -85,7 +81,8 @@ node app.js
 ```
 > 就可以扫码登录了。
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/d4ab1dfd-e667-4826-a7b2-b9171fde7f43.png"  height="200" width="495">
+<img src="images/wechaty-docker.png"  height="50%" width="50%">
+
 
 
 用pm2启动后台运行
@@ -94,18 +91,25 @@ npm install pm2 -g
 
 pm2 start app.js
 ```
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/511d26f4-4dd5-427c-b19e-fabdddb47207.png"  height="50" width="495">
+<img src="images/wechaty-docker.png"  height="50%" width="50%">
 
 ### 使用
 + 智能回复
 ```
-/c xxxx
+/c xxxx   #对话
+
+/c 结束对话  #结束对话
+
 ```
+
+<img src="images/eg1.png" alt="chatgpt.png" title="chatgpt.png"  height="50%" width="50%" />
+<img src="images/eg2.png" alt="chatgpt.png" title="chatgpt.png"  height="50%" width="50%" />
+
 + AI绘画
 ```
 /img xxx
 ```
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/a17c1896-d3db-4ab0-a3ad-ba865adcc26d.png" alt="openai.png" title="openai.png"  height="50%" width="50%" />
+<img src="images/eg3.png" alt="openai.png" title="openai.png"  height="50%" width="50%" />
 
 ### 费用情况
 
@@ -114,7 +118,7 @@ openai是要付费的，价格的计算方式不是简单的按照请求次数�
 
 > 官方价格：https://openai.com/api/pricing
 
-<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-128f461c-6ea9-4838-95b2-1432c033d8e6/f87618ba-ac6b-462c-ad4e-78afec07ecdc.png" alt="pay.png" title="pay.png" height="50%" width="50%" />
+<img src="images/pay.png" alt="pay.png" title="pay.png" height="50%" width="50%" />
 
 ### 故障排除
 + [Chrome 依赖](./docs/puppeteer-error.md)
