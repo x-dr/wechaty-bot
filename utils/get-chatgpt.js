@@ -1,45 +1,61 @@
-import { ChatGPTAPI } from 'chatgpt'
-import pTimeout from 'p-timeout'
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
+import { ChatGPTAPI } from 'chatgpt';
+let apiKey = '';
+const api = new ChatGPTAPI({ apiKey: apiKey || process.env.OPENAI_API_KEY });
 
-
-
-const ChatGPTToken = process.env.ChatGPTToken
-
-const getChatGPTReply = async (content) => {
-    if (ChatGPTToken) {
-        const api = new ChatGPTAPI({ sessionToken: ChatGPTToken })
-        await api.ensureAuth()
-        console.log('content: ', content);
-        // 设置超时时间,防止因超时时因错误而报错拒绝
-        const threeMinutesMs = 3 * 60 * 1000
-        const response = await pTimeout(
-            api.sendMessage(content),
-            {
-                milliseconds: threeMinutesMs,
-                message: '请求超时！'
-            }
-        )
-        console.log('response: ', response);
-        return response
-    } else {
-        return '没有ChatGPT Token'
-    }
-}
-
-const replyMessage = async (mgsfrom, contact, content) => {
-    const reply = await getChatGPTReply(content);
-    try {
-        if (mgsfrom) {
-            await contact.say(`@${mgsfrom} ${reply}`);
-        } else {
-            await contact.say(reply);
+// console.log(api);
+const conversationPool = new Map();
+async function chatgptReply(room, contact, request) {
+    console.log(`contact: ${contact} request: ${request}`);
+    let response = '🤒🤒🤒出了一点小问题，请稍后重试下...';
+    if(request==="结束对话") {
+      conversationPool.delete(contact.id);
+      const target = room || contact;
+      await send(target, `${contact.name()}的已结束对话`);
+      return;
+    }else{
+      try {
+        let opts = {};
+        // conversation
+        let conversation = conversationPool.get(contact.id);
+        if (conversation) {
+          opts = conversation;
         }
-    } catch (e) {
+        opts.timeoutMs = 2 * 60 * 1000;
+        let res = await api.sendMessage(request, opts);
+        response = res.text;
+        // console.log(res);
+        console.log(`contact: ${contact} response: ${response}`);
+        conversation = {
+          conversationId: res.conversationId,
+          parentMessageId: res.id,
+        };
+        conversationPool.set(contact.id, conversation);
+      } catch (e) {
+        if (e.message === 'ChatGPTAPI error 429') {
+          response = '🤯🤯🤯请稍等一下哦，我还在思考你的上一个问题';
+        }
         console.error(e);
+      }
+      response = `${request} \n ------------------------ \n` + response;
+      const target = room || contact;
+      await send(target, response);
     }
-}
 
 
-export default replyMessage
+  }
+  
+
+
+  async function send(contact, message) {
+    try {
+      // console.log(contact);
+      // console.log("\n");
+      // console.log(message);
+      await contact.say(message);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+
+  export default chatgptReply

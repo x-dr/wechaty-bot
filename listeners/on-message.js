@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config()
-import replyMessage from '../utils/get-openai.js'
+import chatgptReply from '../utils/get-chatgpt.js'
 import replyAiImage from '../utils/get-ai-image.js'
 
 //  const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -32,7 +32,8 @@ const onMessage = async (msg, bot) => {
     if (AutoReplyGroup) {
       if (RoomList.length === 0 || RoomList.includes(topic)) {
         if (content.startsWith('/c ')) {
-          replyMessage(mgsfrom, room, content.replace('/c ', ''))
+          // replyMessage(mgsfrom, room, content.replace('/c ', ''))
+          chatgptReply(room, contact, content.replace('/c ', ''))
         } else if (content.startsWith('/img ')) {
           replyAiImage(mgsfrom, room, content.replace('/img ', ''))
         }
@@ -50,7 +51,8 @@ const onMessage = async (msg, bot) => {
       if (FriendList.length === 0 || FriendList.includes(contact.name())) {
         const mgsfrom = false
         if (content.startsWith('/c ')) {
-          replyMessage(mgsfrom, contact, content.replace('/c ', ''))
+          chatgptReply(mgsfrom, contact, content.replace('/c ', ''))
+          // replyMessage(mgsfrom, contact, content.replace('/c ', ''))
         } else if (content.startsWith('/img ')) {
           replyAiImage(mgsfrom, contact, content.replace('/img ', ''))
         }
