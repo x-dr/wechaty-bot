@@ -19,6 +19,11 @@ const onMessage = async (msg, bot) => {
   const isText = msg.type() === bot.Message.Type.Text; // 是否是文字消息
   const receiver = msg.to();  // 消息接收者
 
+  // 不处理 120s前的消息，防止应缓存重复发送
+  if (msg.age() > 120) {
+    console.log(`消息在${msg.age()}S 前发送的`)
+    return;
+  }
   //防止自己和自己对话
   if (msg.self()) {
     return;
