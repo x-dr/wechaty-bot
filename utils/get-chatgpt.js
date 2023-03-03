@@ -3,7 +3,10 @@ import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-d
 dotenv.config()
 
 let apiKey = '';
-const api = new ChatGPTAPI({ apiKey: apiKey || process.env.OPENAI_API_KEY });
+const api = new ChatGPTAPI({ 
+  apiKey: apiKey || process.env.OPENAI_API_KEY,
+  apiBaseUrl: process.env.PROXY_API || 'https://api.openai.com'
+});
 
 const conversationPool = new Map();
 async function chatgptReply(room, contact, request) {

@@ -2,7 +2,18 @@
 
 一个 基于 `OpenAI` + `Wechaty` 智能回复、支持上下文回复、AI绘画的微信机器人,可以用来帮助你自动回复微信消息。
 
+
+#### 反向代理 api.openai.com
+
+api.openai.com 国内无法访问，利用Cloudflare Workers反向代理,[教程](./docs/cf_worker.md)
+
+当你的环境无法使用，不想自建，也可以用我的`https://openai.1rmb.tk`。
+
 ### 准备
+
+<details>
+
+<summary>准备</summary>
 
 + 1、先获取自己的 api key，地址 ：[创建你的 api key](https://beta.openai.com/account/api-keys) 
 > API Key 创建成功。复制好这个Key接下来会用到。点击OK后，Key不会再完整显示。只能删了重新生成Key！
@@ -28,16 +39,19 @@ RoomList = [ ]
 AutoReplyFriend = 1
 #开启chatgpt好友列表，好友名称必须与微信好友名称一致，否则无法自动回复 为空则自动回复所有好友 ["好友1","好友2","好友3"]
 FriendList = [ ]
-
 # openai的key，需要自己去获取 ，地址：https://beta.openai.com/account/api-keys
 OPENAI_API_KEY ='sk-xxxxxxxxxxxxxxxxx'
+# 反代的api,为空时为默认值 https://api.openai.com
+PROXY_API = ''
+
 
 ```
-
+</details>
 
 
 ### 启动服务
-
+<details>
+<summary>使用Docker</summary>
 #### 1、使用Docker
 
 <!-- + 1、安装 `docker` 和 `docker-compose`，地址 ：[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/) -->
@@ -71,9 +85,13 @@ docker logs my-wechaty-bot -f
 docker build -t wechaty-bot .
 docker run -it --rm --name wechaty-bot wechaty-bot
 ```
-
+</details>
 
 #### 2、本地启动
+
+<details>
+<summary>本地启动</summary>
+
 ```bash
 git clone https://github.com/x-dr/wechaty-bot.git
 npm i
@@ -93,7 +111,15 @@ pm2 start app.js
 ```
 <img src="images/wechaty-docker.png"  height="50%" width="50%">
 
+
+</details>
+
 ### 使用
+
+<details>
+
+<summary>使用</summary>
+
 + 智能回复
 ```
 /c xxxx   #对话
@@ -111,7 +137,11 @@ pm2 start app.js
 ```
 <img src="images/eg3.png" alt="openai.png" title="openai.png"  height="50%" width="50%" />
 
+</details>
+
+
 ### 费用情况
+
 
 openai是要付费的，价格的计算方式不是简单的按照请求次数计算，包括相应内容的文字的多少。新账号有18美元免费额度。
 
