@@ -1,5 +1,14 @@
 # ChatGPT Bot
 
+[新版微信机器人](https://github.com/x-dr/wechat-bot)
+
+
+
+
+
+<details>
+
+<summary>旧版，不建议使用</summary>
 
 **封号严重不建议使用**
 
@@ -165,3 +174,5 @@ openai是要付费的，价格的计算方式不是简单的按照请求次数�
 [@wechaty](https://github.com/wechaty/wechaty)
 
 [@transitive-bullshit](https://github.com/transitive-bullshit/chatgpt-api)
+
+</details>
